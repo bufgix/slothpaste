@@ -8,6 +8,9 @@ autopep8 = "*"
 
 [packages]
 requests = "*"
+beautifulsoup4 = "*"
+pygments = "*"
+colorama = "*"
 
 [requires]
 python_version = "3.7"
