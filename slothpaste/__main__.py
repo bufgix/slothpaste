@@ -29,7 +29,9 @@ class Sloth:
 
     def __init__(self, *args: List, **kwargs: Dict[str, str]):
         self.options = kwargs
-        log(f'{len(self.options["file"])} files entered...')
+        log(f'[i] {len(self.options["file"])} files entered...')
+        log(f"[i] Poster: {self.options['poster']}...")
+        print(f"{'=' * 30}")
         for file in self.options['file']:
             payload = self.prepare_payload(file)
             if payload:
@@ -91,13 +93,13 @@ def main():
     parser = ArgumentParser(description="Code sharing app for lazy people.")
     parser.add_argument('file', nargs="+", help="File to share content")
     parser.add_argument(
-        '-p', '--poster', default=getuser(), help="Poster name")
+        '-p', '--poster', default=getuser(), help="Author name")
     parser.add_argument('--syntax', help="Desired syntax (py, js, cpp...)")
     parser.add_argument(
         '--exp', choices=['day', 'week', 'year'], help="Expiration time")
 
     args = parser.parse_args()
-    sloth = Sloth(**vars(args))
+    Sloth(**vars(args))
 
 
 if __name__ == '__main__':
