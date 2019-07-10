@@ -1,2 +1,2 @@
-# slothpaste
-Code sharing app for lazy people.
+# Sloth
+A simple file content sharing app.
