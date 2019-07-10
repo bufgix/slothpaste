@@ -100,11 +100,12 @@ class Sloth:
 
         updated_langs = [lang.get('value') for lang in soup.find_all(
             'option') if lang.get('value')]
-        print(updated_langs)
 
         with LANG_FILE.open(mode="w") as f:
             for lang in updated_langs:
                 f.write(f"{lang}\n")
+
+        log("[+] Updated language database.")
 
 
 def main():
