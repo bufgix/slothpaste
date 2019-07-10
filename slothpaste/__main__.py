@@ -50,7 +50,7 @@ class Sloth:
         log(f"[i] File: {file}")
         payload = dict()
         try:
-            with open(file, 'r') as file_obj:
+            with open(file, 'r', encoding="utf-8") as file_obj:
                 file_content = file_obj.read()
 
             if self.options.get('syntax'):
