@@ -26,7 +26,7 @@ setup(
     install_requires=["requests", "beautifulsoup4", "pygments", "colorama", "pyperclip"],
     entry_points={
         "console_scripts": [
-            "sloth=slothpate.__main__:main",
+            "sloth=slothpaste.__main__:main",
         ]
     },
 )
