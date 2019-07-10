@@ -71,6 +71,10 @@ class Sloth:
                 syntax_type = 'python3'  # Python 2 is dead, Just Python 3
             log(f"[i] Detected language {syntax_type}")
 
+        except FileNotFoundError:
+            log(f"[!] {file} not found!",  'error')
+            return
+            
         except ClassNotFound:
             syntax_type = 'text'
             log(f"[*] Language not detected. Used raw text")
