@@ -43,8 +43,9 @@ class Sloth:
                 log(f"[+] Paste link: {share_link}", 'success')
 
             print(f"\n{'=' * 30}\n")
-        pyperclip.copy(share_link)
-        log(f"Copied last link: {share_link}")
+        if payload:
+            pyperclip.copy(share_link)
+            log(f"Copied last link: {share_link}")
 
     def prepare_payload(self, file: str) -> Dict[str, str]:
         log(f"[i] File: {file}")
@@ -53,28 +54,34 @@ class Sloth:
             with open(file, 'r', encoding="utf-8") as file_obj:
                 file_content = file_obj.read()
 
+            langs = [line.rstrip('\n')
+                     for line in LANG_FILE.open(mode='r')]
+
             if self.options.get('syntax'):
                 wanted_lang = self.options.get('syntax').lower()
-                langs = [line.rstrip('\n')
-                         for line in LANG_FILE.open(mode='r')]
 
                 if wanted_lang in langs:
                     syntax_type = wanted_lang
                 else:
                     syntax_type = 'text'
-                    log(f"[*] {wanted_lang} language not not supported by {self.URL}")
+                    log(f"[*] {wanted_lang} language not supported by {self.URL}")
             else:
                 syntax_type = guess_lexer_for_filename(
                     file, file_content).aliases[0]
 
             if syntax_type in ['python2', 'python']:
-                syntax_type = 'python3'  # Python 2 is dead, Just Python 3
-            log(f"[i] Detected language {syntax_type}")
+                syntax_type = 'python3'  # Python 2 is dead, Just Python 3s
+
+            if not syntax_type in langs:
+                log(f"[*] {syntax_type} language not supported by {self.URL}")
+                syntax_type = "text"
+
+            log(f"[i] Syntax: {syntax_type}")
 
         except FileNotFoundError:
             log(f"[!] {file} not found!",  'error')
-            return
-            
+            return None
+
         except ClassNotFound:
             syntax_type = 'text'
             log(f"[*] Language not detected. Used raw text")
@@ -124,7 +131,7 @@ def main():
 
     parser.add_argument('-u', '--update-db', action="store_true",
                         help="Update suported langs from paste.ubuntu.com")
-    ## TODO: Fix argument --update-db
+    # TODO: Fix argument --update-db
     args = parser.parse_args()
     Sloth(**vars(args))
 
