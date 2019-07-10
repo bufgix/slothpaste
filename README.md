@@ -3,7 +3,7 @@ A simple file content sharing app.
 
 ## Installation
 ```bash
-$ pip install sloth-paste
+$ pip install sloth-paste --upgrade
 ```
 
 ## Usage
