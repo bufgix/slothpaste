@@ -8,6 +8,7 @@ from getpass import getuser
 from typing import List, Dict, Any
 import requests
 import pathlib
+import pyperclip
 
 LANG_FILE = pathlib.Path(__file__).absolute().parent / 'langs.txt'
 
@@ -40,7 +41,10 @@ class Sloth:
             if payload:
                 share_link = self.get_link(payload)
                 log(f"[+] Paste link: {share_link}", 'success')
+
             print(f"\n{'=' * 30}\n")
+        pyperclip.copy(share_link)
+        log(f"Copied last link: {share_link}")
 
     def prepare_payload(self, file: str) -> Dict[str, str]:
         log(f"[i] File: {file}")
