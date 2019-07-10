@@ -12,7 +12,7 @@ setup(
     description="A simple file content sharing app.",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/bufgix/slothpaster",
+    url="https://github.com/bufgix/slothpaste",
     author="Bufgix",
     author_email="ooruc471@yandex.com",
     license="MIT",
